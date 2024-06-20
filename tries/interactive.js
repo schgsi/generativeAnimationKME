@@ -38,7 +38,7 @@ var sketch = function(p) {
   // dragged node
   var selectedNode = null;
 
-  var nodeDiameter = 16;
+  var nodeDiameter = 50;
 
   p.setup = function() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -79,10 +79,15 @@ var sketch = function(p) {
     // draw nodes
     p.noStroke();
     for (var i = 0; i < nodes.length; i++) {
-      p.fill('#15FF00');
-      p.ellipse(nodes[i].x, nodes[i].y, nodeDiameter, nodeDiameter);
-      p.fill('#15FF00');
-      p.ellipse(nodes[i].x, nodes[i].y, nodeDiameter - 4, nodeDiameter - 4);
+      if(i == 5){
+        p.fill(0);
+        p.ellipse(nodes[i].x, nodes[i].y, nodeDiameter, nodeDiameter);
+      }
+      if (i>5||i<5){
+
+        p.fill('#15FF00');
+        p.ellipse(nodes[i].x, nodes[i].y, nodeDiameter, nodeDiameter);
+      }
     }
 
   };
@@ -98,7 +103,7 @@ var sketch = function(p) {
       newNode.minY = rad;
       newNode.maxX = p.width - rad;
       newNode.maxY = p.height - rad;
-      newNode.radius = 100;
+      newNode.radius = 300;
       newNode.strength = -5;
       nodes.push(newNode);
     }
@@ -112,7 +117,7 @@ var sketch = function(p) {
         var r = p.floor(p.random(j + 1, nodes.length));
         var newSpring = new Spring(nodes[j], nodes[r]);
         newSpring.length = 20;
-        newSpring.stiffness = 1;
+        newSpring.stiffness = 0.5;
         springs.push(newSpring);
       }
     }
